@@ -17,7 +17,7 @@
                             </p>
                         </div>
 
-                        Product variation selector
+                        {{ $product->variations->sortBy('order')->groupBy('type')->first() }}
                     </div>
                 </div>
             </div>
