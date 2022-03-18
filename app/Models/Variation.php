@@ -14,6 +14,11 @@ class Variation extends Model
 
     protected $guarded = [];
 
+    public function formattedPrice()
+    {
+        return money($this->price);
+    }
+
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);

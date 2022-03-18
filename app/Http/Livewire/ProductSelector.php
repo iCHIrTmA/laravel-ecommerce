@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Variation;
 use Livewire\Component;
 
 class ProductSelector extends Component
@@ -10,9 +11,30 @@ class ProductSelector extends Component
 
     public $initialVariation;
 
+    public $skuVariant;
+
+    protected $listeners = [
+        'skuVariantSelected'
+    ];
+
     public function mount()
     {
         $this->initialVariation = $this->product->variations->sortBy('order')->groupBy('type')->first();
+    }
+
+    public function skuVariantSelected($selectedVariantId)
+    {
+        if(!$selectedVariantId) {
+            $this->skuVariant = null;
+            return;
+        }
+
+        $this->skuVariant = Variation::find($selectedVariantId);
+    }
+
+    public function addToCart()
+    {
+        dd($this->skuVariant);
     }
 
     public function render()
