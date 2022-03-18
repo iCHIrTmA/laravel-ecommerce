@@ -20,7 +20,6 @@ class ProductDropdown extends Component
 
     public function updatedSelectedVariation()
     {
-        dd($this->selectedVariationModel);
     }
 
     public function render()
