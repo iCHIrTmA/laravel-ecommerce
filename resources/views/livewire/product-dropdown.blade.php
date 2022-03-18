@@ -6,7 +6,7 @@
         <option value="">Choose an option</option>
         @foreach($variations as $variation)
             <option value="{{ $variation->id }}">
-                {{ $variation->title}}
+                {{ $variation->title }}
             </option>
         @endforeach
     </x-select>
