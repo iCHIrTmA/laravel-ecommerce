@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Cknow\Money\Money;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -15,9 +16,29 @@ class Variation extends Model
 
     protected $guarded = [];
 
-    public function formattedPrice()
+    public function formattedPrice(): Money
     {
         return money($this->price);
+    }
+
+    public function inStock(): bool
+    {
+        return $this->stockCount() > 0;
+    }
+
+    public function outOfStock(): bool
+    {
+        return ! $this->inStock();
+    }
+
+    public function lowStock(): bool
+    {
+        return $this->inStock() && $this->stockCount() <= 5;
+    }
+
+    public function stockCount(): int
+    {
+        return $this->descendantsAndSelf->sum(fn ($variation) => $variation->stocks->sum('amount'));
     }
 
     public function stocks(): HasMany
