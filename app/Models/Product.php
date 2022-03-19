@@ -39,6 +39,4 @@ class Product extends Model implements HasMedia
         $this->addMediaCollection('default')
             ->useFallbackUrl(url('/storage/no-product-image-available.jpg'));
     }
-
-
 }
