@@ -36,6 +36,8 @@
             </main>
         </div>
 
+        <x-notification />
+
         <livewire:scripts />
     </body>
 </html>
