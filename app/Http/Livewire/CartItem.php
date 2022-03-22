@@ -19,6 +19,12 @@ class CartItem extends Component
     public function updatedQuantity($quantity)
     {
         app(CartInterface::class)->changeQuantity($this->variation, $quantity);
+
+        $this->emit('cart.updated');
+
+        $this->dispatchBrowserEvent('notification', [
+            'body' => "Quantity updated",
+        ]);
     }
 
     public function remove(CartInterface $cart)

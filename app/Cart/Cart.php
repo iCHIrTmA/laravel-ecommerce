@@ -51,12 +51,6 @@ class Cart implements CartInterface
 
             'quantity' => min($quantity, $variation->stockCount()),
         ]);
-
-        $this->emit('cart.updated');
-
-        $this->dispatchBrowserEvent('notification', [
-            'body' => "Quanity updated",
-        ]);
     }
 
     public function remove(Variation $variation)
@@ -82,6 +76,19 @@ class Cart implements CartInterface
     public function contentsCount()
     {
         return $this->contents()->count();
+    }
+
+    public function subtotal()
+    {
+        return $this->instance()->variations
+                ->reduce(function ($carry, $variation) {
+                    return $carry + ($variation->price * $variation->pivot->quantity);
+                });
+    }
+
+    public function formattedSubtotal()
+    {
+        return money($this->subtotal());
     }
 
     protected function instance()
