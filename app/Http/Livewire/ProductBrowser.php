@@ -25,8 +25,18 @@ class ProductBrowser extends Component
 
     public function render()
     {
-        $search = Product::search('', function ($meilisearch, string $query, array $options) {
+        $filters = collect($this->queryFilters)->filter()
+                ->recursive()
+                ->map(function ($value, $key) {
+                    return $value->map(fn ($value) => $key . ' = "' . $value . '"');
+                })
+                ->flatten()
+                ->join(' AND ');
+
+        $search = Product::search('', function ($meilisearch, string $query, array $options) use ($filters) {
             $options['facetsDistribution'] = ['size', 'color'];
+
+            $options['filter'] = $filters;
 
             return $meilisearch->search($query, $options);
         })->raw();
