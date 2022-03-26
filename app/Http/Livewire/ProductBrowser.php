@@ -11,15 +11,17 @@ class ProductBrowser extends Component
 
     public function render()
     {
-        $products = Product::search('', function ($meilisearch, string $query, array $options) {
-            $options['filter'] = 'category_ids = ' . $this->category->id;
+        $search = Product::search('', function ($meilisearch, string $query, array $options) {
+            $options['facetsDistribution'] = ['size', 'color'];
 
-            // **TODO: use Postman to explicitly add category ids as filterable attribute the pass $options as second arg in $meilisearch->search()
-            return $meilisearch->search($query);
-        })->get();
+            return $meilisearch->search($query, $options);
+        })->raw();
+
+        $products = $this->category->products->find(collect($search['hits'])->pluck('id'));
 
         return view('livewire.product-browser',[
             'products' => $products,
+            'filters' => $search['facetsDistribution'],
         ]);
     }
 }
