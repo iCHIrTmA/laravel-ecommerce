@@ -24,8 +24,18 @@ class Checkout extends Component
         return $this->shippingTypes->find($this->shippingTypeId);
     }
 
-    public function render(CartInterface $cart)
+    public function getTotalProperty(CartInterface $cart)
     {
+        return $cart->subTotal() + $this->shippingType->price;
+    }
+
+    public function getFormattedTotalProperty()
+    {
+        return money($this->total);
+    }
+
+    public function render(CartInterface $cart)
+    {    
         return view('livewire.checkout', [
             'cart' => $cart,
         ]);

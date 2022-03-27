@@ -113,7 +113,7 @@
                 <div class="space-y-1">
                     <div class="space-y-1 flex items-center justify-between">
                         <div class="font-semibold">Subtotal</div>
-                        <h1 class="font-semibold">$0</h1>
+                        <h1 class="font-semibold">{{ $cart->formattedSubtotal() }}</h1>
                     </div>
 
                     <div class="space-y-1 flex items-center justify-between">
@@ -123,7 +123,7 @@
 
                     <div class="space-y-1 flex items-center justify-between">
                         <div class="font-semibold">Total</div>
-                        <h1 class="font-semibold">$0</h1>
+                        <h1 class="font-semibold">{{ $this->formattedTotal }}</h1>
                     </div>
                 </div>
 
