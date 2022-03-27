@@ -645,6 +645,9 @@ select {
 .col-span-1 {
   grid-column: span 1 / span 1;
 }
+.col-span-3 {
+  grid-column: span 3 / span 3;
+}
 .col-span-5 {
   grid-column: span 5 / span 5;
 }
@@ -713,14 +716,17 @@ select {
 .-mt-px {
   margin-top: -1px;
 }
+.mr-4 {
+  margin-right: 1rem;
+}
+.mr-1 {
+  margin-right: 0.25rem;
+}
 .mb-6 {
   margin-bottom: 1.5rem;
 }
 .-mt-3 {
   margin-top: -0.75rem;
-}
-.mr-4 {
-  margin-right: 1rem;
 }
 .block {
   display: block;
@@ -790,6 +796,9 @@ select {
 }
 .w-8 {
   width: 2rem;
+}
+.w-16 {
+  width: 4rem;
 }
 .w-48 {
   width: 12rem;
@@ -919,6 +928,11 @@ select {
   --tw-space-y-reverse: 0;
   margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
+}
+.space-y-3 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.75rem * var(--tw-space-y-reverse));
 }
 .space-x-2 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
@@ -1208,6 +1222,10 @@ select {
 .text-gray-200 {
   --tw-text-opacity: 1;
   color: rgb(229 231 235 / var(--tw-text-opacity));
+}
+.text-red-500 {
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity));
 }
 .underline {
   -webkit-text-decoration-line: underline;
