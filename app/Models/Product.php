@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Scopes\LiveScope;
 use Cknow\Money\Money;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -20,6 +21,11 @@ class Product extends Model implements HasMedia
     use Searchable;
 
     protected $guarded = [];
+
+    public static function booted()
+    {
+        static::addGlobalScope(new LiveScope());   
+    }
 
     public function formattedPrice()
     {
