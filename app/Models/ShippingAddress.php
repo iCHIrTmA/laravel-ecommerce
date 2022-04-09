@@ -15,4 +15,13 @@ class ShippingAddress extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function getFormattedAddress()
+    {
+        return sprintf('%s, %s, %s',
+            $this->address,
+            $this->city,
+            $this->postcode,
+        );
+    }
 }

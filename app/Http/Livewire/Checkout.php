@@ -19,6 +19,8 @@ class Checkout extends Component
         'email' => ''
     ];
 
+    public $userShippingAddressId;
+
     public $shippingForm = [
         'address' => '',
         'city' => '',
@@ -59,6 +61,13 @@ class Checkout extends Component
         } 
     }
 
+    public function updatedUserShippingAddressId($id)
+    {
+        if (!$id) return;
+
+        $this->shippingForm = $this->userShippingAddresses->find($id)->only(['address', 'city', 'postcode']);
+    }
+
     public function getShippingTypeProperty()
     {
         return $this->shippingTypes->find($this->shippingTypeId);
@@ -72,6 +81,11 @@ class Checkout extends Component
     public function getFormattedTotalProperty()
     {
         return money($this->total);
+    }
+
+    public function getUserShippingAddressesProperty()
+    {
+        return auth()->user()?->shippingAddresses;
     }
 
     public function checkout()

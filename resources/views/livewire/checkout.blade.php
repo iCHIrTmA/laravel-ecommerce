@@ -20,9 +20,11 @@
             <div class="space-y-3">
                 <div class="font-semibold text-lg">Shipping</div>
 
-                <x-select class="w-full">
+                <x-select wire:model="userShippingAddressId" class="w-full">
                     <option value="">Choose a pre-saved address</option>
-                    <option value="">Pre-saved address</option>
+                        @foreach ($this->userShippingAddresses as $shippingAddress)
+                            <option value="{{ $shippingAddress->id }}">{{ $shippingAddress->getFormattedAddress() }}</option>
+                        @endforeach
                 </x-select>
 
                 <div class="space-y-3">
