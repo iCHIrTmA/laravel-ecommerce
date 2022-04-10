@@ -19,7 +19,7 @@ use App\Http\Controllers\ProductShowController;
 */
 
 Route::get('/', HomeController::class)->name('home');
-Route::get('/cart', CartIndexController::class);
+Route::get('/cart', CartIndexController::class)->name('cart');
 Route::get('/checkout', CheckoutIndexController::class);
 Route::get('/categories/{category:slug}', CategoryShowController::class);
 Route::get('/products/{product:slug}', ProductShowController::class);
