@@ -13,6 +13,7 @@ class CartIndexController extends Controller
         try {
             $cart->verifyAvailableQuantities();
         } catch (QuantityNoLongerAvailable $e) {
+            session()->flash('notification', 'Some of the quantities in your cart items have changed.');
             $cart->syncAvailableQuantities();
         }
 
