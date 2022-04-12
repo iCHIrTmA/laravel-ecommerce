@@ -123,7 +123,16 @@ class Checkout extends Component
                     ]
                 ]; 
             })
+            ->toArray()
         );
+
+        $cart->contents()->each(function ($variation) {
+            $variation->stocks()->create([
+                'amount' => 0 - $variation->pivot->quantity
+            ]);
+        });
+
+        $cart->removeAll();
     }
 
     public function render(CartInterface $cart)
