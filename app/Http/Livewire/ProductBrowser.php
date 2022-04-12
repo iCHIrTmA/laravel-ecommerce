@@ -35,7 +35,7 @@ class ProductBrowser extends Component
                     return $value->map(fn ($value) => $key . ' = "' . $value . '"');
                 })
                 ->flatten()
-                ->join(' AND ');
+                ->join(' OR ');
 
         $search = Product::search('', function ($meilisearch, string $query, array $options) use ($filters) {
             $options['facetsDistribution'] = ['size', 'color'];
