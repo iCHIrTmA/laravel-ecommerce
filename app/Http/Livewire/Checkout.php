@@ -133,6 +133,12 @@ class Checkout extends Component
         });
 
         $cart->removeAll();
+
+        if(!auth()->user()) {
+            return redirect()->route('orders.confirmation', $order);
+        }
+
+        return redirect()->route('orders');
     }
 
     public function render(CartInterface $cart)
