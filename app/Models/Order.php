@@ -21,12 +21,25 @@ class Order extends Model
         'shipped_at',
     ];
 
+    public $statuses = [
+        'placed_at',
+        'packaged_at',
+        'shipped_at',
+    ];
+
     public static function booted()
     {
         static::creating(function (Order $order) {
             $order->placed_at = Carbon::now();
             $order->uuid = (string) Str::uuid();
         });
+    }
+
+
+    public function status()
+    {
+        return collect($this->statuses)
+            ->last(fn ($status) => filled($this->{$status}));
     }
 
     public function formattedSubtotal()
