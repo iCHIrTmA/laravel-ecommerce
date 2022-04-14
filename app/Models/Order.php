@@ -29,6 +29,11 @@ class Order extends Model
         });
     }
 
+    public function formattedSubtotal()
+    {
+        return money($this->subtotal);
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
