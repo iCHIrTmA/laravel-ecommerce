@@ -136,6 +136,8 @@ class Checkout extends Component
 
         $cart->removeAll();
 
+        $cart->destroy();
+
         Mail::to($order->email)->send(new OrderCreated($order));
 
         if(!auth()->user()) {
