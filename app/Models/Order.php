@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Presenters\OrderPresenter;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -35,11 +36,15 @@ class Order extends Model
         });
     }
 
-
     public function status()
     {
         return collect($this->statuses)
             ->last(fn ($status) => filled($this->{$status}));
+    }
+
+    public function presenter()
+    {
+        return new OrderPresenter($this);
     }
 
     public function formattedSubtotal()
