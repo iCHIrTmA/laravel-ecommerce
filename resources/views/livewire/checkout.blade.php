@@ -21,7 +21,11 @@
                 }
             )
 
-            console.log(paymentIntent, error)
+            if (error) {
+                // show an error
+            } else {
+                $wire.checkout()
+            }
         },
 
         init() {
