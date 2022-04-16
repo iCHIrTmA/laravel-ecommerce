@@ -12,7 +12,16 @@
 
             if(errorCount) return
 
-            console.log('submit payment')
+            const { paymentIntent, error } = await this.stripe.confirmCardPayment(
+                '{{ $paymentIntent->client_secret }}',
+                { payment_method: {
+                    card: this.cardElement,
+                    billing_details: { email: 'hello@example.net' }
+                    }
+                }
+            )
+
+            console.log(paymentIntent, error)
         },
 
         init() {
