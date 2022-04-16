@@ -4,8 +4,15 @@
         stripe: null,
         cardElement: null,
 
-        submit() {
-            console.log('asdsa')
+        async submit() {
+
+            await $wire.callValidate()
+
+            let errorCount = await $wire.getErrorCount()
+
+            if(errorCount) return
+
+            console.log('submit payment')
         },
 
         init() {
@@ -113,7 +120,7 @@
 
             <div class="space-y-3">
                 <div class="font-semibold text-lg">Payment</div>
-                    <div id="card-element">
+                    <div wire:ignore id="card-element">
                     </div>
             </div>
         </div>
