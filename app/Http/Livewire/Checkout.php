@@ -147,10 +147,38 @@ class Checkout extends Component
         return redirect()->route('orders');
     }
 
+    public function getPaymentIntent(CartInterface $cart)
+    {
+        if ($cart->hasPaymentIntent()) {
+            $paymentIntent = app('stripe')->paymentIntents->retrieve($cart->getPaymentIntentId());
+
+            if ($paymentIntent->status !== 'succeeded') {
+                app('stripe')->paymentIntents->update($cart->getPaymentIntentId(), [
+                    'amount' => (int) $this->total,
+                ]);
+            }
+
+            dd($paymentIntent);
+
+            return $paymentIntent;
+        }
+
+        $paymentIntent = app('stripe')->paymentIntents->create([
+            'amount' => (int) $this->total,
+            'currency' => 'EUR',
+            'setup_future_usage' => 'on_session',
+        ]);
+
+        $cart->updatePaymentIntentId($paymentIntent->id);
+
+        return $paymentIntent;
+    }
+
     public function render(CartInterface $cart)
-    {    
+    {
         return view('livewire.checkout', [
             'cart' => $cart,
+            'paymentIntent' => $this->getPaymentIntent($cart),
         ]);
     }
 }

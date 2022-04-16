@@ -94,6 +94,7 @@
             </div>
 
             <div class="space-y-3">
+                {{ $paymentIntent->client_secret }}
                 <div class="font-semibold text-lg">Payment</div>
 
                 <div>

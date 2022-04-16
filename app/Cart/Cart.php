@@ -90,7 +90,6 @@ class Cart implements CartInterface
 
     public function syncAvailableQuantities()
     {
-
         $syncedQuantities = $this->instance()->variations->mapWithKeys(function ($variation) {
             $quantity = $variation->pivot->quantity > $variation->stocks->sum('count')
                 ? $variation->stockCount()
@@ -141,6 +140,23 @@ class Cart implements CartInterface
     public function formattedSubtotal()
     {
         return money($this->subtotal());
+    }
+
+    public function hasPaymentIntent()
+    {
+        return !is_null($this->getPaymentIntentId());
+    }
+
+    public function getPaymentIntentId()
+    {
+        return $this->instance()->payment_intent_id;
+    }
+
+    public function updatePaymentIntentId($paymentIntentId)
+    {
+        $this->instance()->update([
+            'payment_intent_id' => $paymentIntentId,
+        ]);
     }
 
     protected function clearInstanceCache()
