@@ -158,8 +158,6 @@ class Checkout extends Component
                 ]);
             }
 
-            dd($paymentIntent);
-
             return $paymentIntent;
         }
 
