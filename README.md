@@ -1,64 +1,35 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+Categories table
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+| id | title       | slug        | parent_id | created_at          | updated_at          |
+|----|-------------|-------------|-----------|---------------------|---------------------|
+|  1 | Brands      | brands      |           | 2022-03-16 23:57:16 | 2022-03-16 23:57:16 |
+|  2 | Seasons     | seasons     |           | 2022-03-16 23:57:31 | 2022-03-16 23:57:31 |
+|  3 | Nike        | nike        |         1 | 2022-03-17 00:13:52 | 2022-03-17 00:13:52 |
+|  4 | Winter      | winter      |         2 | 2022-03-17 00:13:52 | 2022-03-17 00:13:52 |
+|  5 | Spring      | spring      |         2 | 2022-03-17 00:13:52 | 2022-03-17 00:13:52 |
+|  6 | New Arrival | new-arrival |         3 | 2022-03-17 00:13:52 | 2022-03-17 00:13:52 |
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Products table
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+| id | title            | slug             | description                   | price | live_at             | created_at          | updated_at          |
+|----|------------------|------------------|-------------------------------|-------|---------------------|---------------------|---------------------|
+|  1 | Nike Air Force 1 | nike-air-force-1 | this is a product description |  9000 | 2022-03-17 12:12:20 | 2022-03-17 12:12:20 | 2022-03-17 12:12:20 |
+|  2 | Example Product  | example-product  | example-product               |  6600 | 2022-03-27 00:39:00 | 2022-03-19 04:32:51 | 2022-03-19 04:32:51 |
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+Variations table
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+| id | product_id | title   | price | type  | sku | parent_id | order | created_at          | updated_at          |
+|----|------------|---------|-------|-------|-----|-----------|-------|---------------------|---------------------|
+| 10 |          1 | 14      | 15500 | size  | qrs |         9 |     1 | 2022-03-26 01:54:38 | 2022-03-26 01:54:38 |
+|  9 |          1 | Rainbow | 15000 | color |     |           |     3 | 2022-03-26 01:53:45 | 2022-03-26 01:53:45 |
+|  8 |          2 | 14      | 15500 | size  | mno |         7 |     1 | 2022-03-24 04:57:40 | 2022-03-24 04:57:40 |
+|  7 |          2 | Rainbow | 15000 | color |     |           |     1 | 2022-03-24 04:57:40 | 2022-03-24 04:57:40 |
+|  6 |          1 | 10      | 11000 | size  | jkl |         2 |     2 | 2022-03-17 23:32:24 | 2022-03-17 23:32:24 |
+|  5 |          1 | 8       |  9500 | size  | ghi |         2 |     1 | 2022-03-17 23:32:24 | 2022-03-17 23:32:24 |
+|  4 |          1 | 9       |  9000 | size  | def |         1 |     2 | 2022-03-17 23:32:24 | 2022-03-17 23:32:24 |
+|  3 |          1 | 8       |  9000 | size  | abc |         1 |     1 | 2022-03-17 23:32:24 | 2022-03-17 23:32:24 |
+|  2 |          1 | White   |  9500 | color |     |           |     2 | 2022-03-17 23:32:24 | 2022-03-17 23:32:24 |
+|  1 |          1 | Black   |  9000 | color |     |           |     1 | 2022-03-17 23:32:24 | 2022-03-17 23:32:24 |
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
