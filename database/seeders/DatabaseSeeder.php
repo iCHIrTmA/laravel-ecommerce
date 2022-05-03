@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ShippingType;
 use App\Models\Stock;
 use App\Models\Variation;
 use Carbon\Carbon;
@@ -69,8 +70,17 @@ class DatabaseSeeder extends Seeder
             ['variation_id' => 4, 'amount' => 11, 'created_at' => Carbon::now()->toDateTimeString(), 'updated_at' => Carbon::now()->toDateTimeString()],
             ['variation_id' => 6, 'amount' => 8, 'created_at' => Carbon::now()->toDateTimeString(), 'updated_at' => Carbon::now()->toDateTimeString()],
             ['variation_id' => 10, 'amount' => 2, 'created_at' => Carbon::now()->toDateTimeString(), 'updated_at' => Carbon::now()->toDateTimeString()],
+            ['variation_id' => 8, 'amount' => 9, 'created_at' => Carbon::now()->toDateTimeString(), 'updated_at' => Carbon::now()->toDateTimeString()],
         ];
 
         Stock::insert($stockData);
+
+        $shippingTypeData = [
+            ['title' => 'UPS Free', 'price' => 0, 'created_at' => Carbon::now()->toDateTimeString(), 'updated_at' => Carbon::now()->toDateTimeString()],
+            ['title' => 'UPS Standard', 'price' => 2000, 'created_at' => Carbon::now()->toDateTimeString(), 'updated_at' => Carbon::now()->toDateTimeString()],
+            ['title' => 'UPS Premium', 'price' => 3000, 'created_at' => Carbon::now()->toDateTimeString(), 'updated_at' => Carbon::now()->toDateTimeString()],
+        ];
+
+        ShippingType::insert($shippingTypeData);
     }
 }
