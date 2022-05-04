@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use Algolia\ScoutExtended\Facades\Algolia;
 use App\Models\Product;
 use Livewire\Component;
 
@@ -32,28 +33,24 @@ class ProductBrowser extends Component
         $filters = collect($this->queryFilters)->filter()
                 ->recursive()
                 ->map(function ($value, $key) {
-                    return $value->map(fn ($value) => $key . ' = "' . $value . '"');
+                    return $value->map(fn ($value) => $key . ':' . $value);
                 })
                 ->flatten()
                 ->join(' OR ');
 
-        $search = Product::search('', function ($meilisearch, string $query, array $options) use ($filters) {
-            $options['facetsDistribution'] = ['size', 'color'];
+        if($this->priceRange['max']) {
+                $filters .= (isset($filters[0]) ? ' AND ' : '') . 'price <= ' . $this->priceRange['max'];
+        }
+                
+        $products = Product::search('')->with([
+            'filters' => $filters,
+        ])->get();
 
-            $options['filter'] = null;
+        $index = Algolia::index(Product::class);
 
-            if($filters) {
-                $options['filter'] = $filters;
-            }
-
-            if($this->priceRange['max']) {
-                $options['filter'] .= (isset($options['filter']) ? ' AND ' : '') . 'price <= ' . $this->priceRange['max'];
-            }
-
-            return $meilisearch->search($query, $options);
-        })->raw();
-
-        $products = $this->category->products->find(collect($search['hits'])->pluck('id'));
+        $results = $index->search('', [
+            'facets' => ['color', 'size']
+        ]);
 
         $maxPrice = $this->category->products()->max('price');
 
@@ -61,7 +58,7 @@ class ProductBrowser extends Component
 
         return view('livewire.product-browser',[
             'products' => $products,
-            'filters' => $search['facetsDistribution'],
+            'filters' => $results['facets'],
             'maxPrice' => $maxPrice,
         ]);
     }
