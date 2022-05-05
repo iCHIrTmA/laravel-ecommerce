@@ -6,7 +6,9 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "ext-gd": "*",
         "algolia/scout-extended": "^2.0",
+        "aws/aws-sdk-php": "^3.222",
         "cknow/laravel-money": "^6.3",
         "guzzlehttp/guzzle": "^7.2",
         "http-interop/http-factory-guzzle": "^1.2",
@@ -14,12 +16,12 @@
         "laravel/sanctum": "^2.14.1",
         "laravel/scout": "^9.4",
         "laravel/tinker": "^2.7",
+        "league/flysystem-aws-s3-v3": "^3.0",
         "livewire/livewire": "^2.10",
         "meilisearch/meilisearch-php": "^0.23.1",
         "spatie/laravel-medialibrary": "^10.0.0",
         "staudenmeir/laravel-adjacency-list": "^1.0",
-        "stripe/stripe-php": "^7.123",
-        "ext-gd": "*"
+        "stripe/stripe-php": "^7.123"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
