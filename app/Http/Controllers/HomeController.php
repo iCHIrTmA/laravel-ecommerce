@@ -10,7 +10,7 @@ class HomeController extends Controller
     public function __invoke()
     {
         return view('categories.show',[
-            'category' => Category::find(3),
+            'category' => Category::find(2),
         ]);
     }
 }

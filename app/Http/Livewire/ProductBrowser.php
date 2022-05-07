@@ -44,7 +44,7 @@ class ProductBrowser extends Component
                 
         $products = Product::search('')->with([
             'filters' => $filters,
-        ])->get();
+        ])->get()->sortByDesc('price');
 
         $index = Algolia::index(Product::class);
 

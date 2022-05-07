@@ -65,6 +65,6 @@ class Variation extends Model implements HasMedia
     public function registerMediaCollections(?Media $media = null): void
     {
         $this->addMediaCollection('default')
-            ->useFallbackUrl(url('/storage/no-product-image-available.jpg'));
+            ->useFallbackUrl(url('https://jonruedev.s3.ap-northeast-1.amazonaws.com/no-product-image-available.jpg'));
     }
 }
