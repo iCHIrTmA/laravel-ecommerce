@@ -4,14 +4,21 @@
         stripe: null,
         cardElement: null,
         email: @entangle('accountForm.email').defer,
+        submitButtonLabel: 'Confirm Order and Pay',
 
         async submit() {
+            this.submitButtonLabel = 'Processing...'
 
             await $wire.callValidate()
 
             let errorCount = await $wire.getErrorCount()
 
-            if(errorCount) return
+            if(errorCount) {
+                this.submitButtonLabel = 'Confirm Order and Pay'
+
+                return
+            }
+
 
             const { paymentIntent, error } = await this.stripe.confirmCardPayment(
                 '{{ $paymentIntent->client_secret }}',
@@ -23,6 +30,8 @@
             )
 
             if (error) {
+                this.submitButtonLabel = 'Confirm Order and Pay'
+
                 window.dispatchEvent(new CustomEvent('notification', {
                     detail: {
                         body: error.message,
@@ -197,7 +206,7 @@
                     </div>
                 </div>
 
-                <x-button type="submit">Confirm order and pay</x-button>
+                <x-button type="submit" x-text="submitButtonLabel"></x-button>
             </div>
         </div>
     </div>
